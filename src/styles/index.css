@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Thmanyah";
+  src: url("../assets/fonts/Thmanyah-Font-Family/thmanyah typeface/thmanyahsans/woff2/thmanyahsans-Regular.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Thmanyah";
+  src: url("../assets/fonts/Thmanyah-Font-Family/thmanyah typeface/thmanyahsans/woff2/thmanyahsans-Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Thmanyah";
+  src: url("../assets/fonts/Thmanyah-Font-Family/thmanyah typeface/thmanyahsans/woff2/thmanyahsans-Black.woff2")
+    format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  font-family: "Thmanyah", sans-serif;
+  background: #f8fafc;
+  --mobile-nav-height: 4.75rem;
+  --mobile-nav-gap: 0.75rem;
+  --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+:root.dark {
+  color-scheme: dark;
+  background: #020617;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Thmanyah", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 767px) {
+  html.mobile-nav-open body {
+    padding-bottom: calc(var(--mobile-nav-height) + var(--mobile-nav-gap) + var(--mobile-safe-bottom));
+  }
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(124, 58, 237, 0.35);
+}
+
+.mobile-safe-nav {
+  bottom: calc(var(--mobile-nav-gap) + var(--mobile-safe-bottom));
+}
