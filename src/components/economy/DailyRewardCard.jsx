@@ -4,7 +4,19 @@ import { Card } from "../ui/Card";
 import { LoadingSpinner } from "../ui/LoadingSpinner";
 import { Toast } from "../ui/Toast";
 
-export function DailyRewardCard({ profile, reward, canClaim, nextAvailableMessage, isLoading, isClaiming, toast, onClaim }) {
+export function DailyRewardCard({
+  profile,
+  reward,
+  canClaim,
+  nextAvailableMessage,
+  authLoading,
+  isLoading,
+  isClaiming,
+  toast,
+  onClaim,
+}) {
+  const isBusy = authLoading || isLoading || isClaiming;
+
   return (
     <Card className="relative overflow-hidden rounded-[2rem]">
       <div className="absolute left-0 top-0 h-28 w-28 rounded-full bg-gold/20 blur-3xl" />
@@ -40,8 +52,14 @@ export function DailyRewardCard({ profile, reward, canClaim, nextAvailableMessag
 
         <Toast message={toast?.message} tone={toast?.tone} />
 
-        <Button type="button" className="mt-4 w-full" disabled={!canClaim || isLoading || isClaiming} onClick={onClaim}>
-          {isClaiming ? <LoadingSpinner label="جار الاستلام" /> : canClaim ? "استلام المكافأة" : nextAvailableMessage || "تم استلام مكافأة اليوم"}
+        <Button type="button" className="mt-4 w-full" disabled={!canClaim || isBusy} onClick={onClaim}>
+          {isBusy ? (
+            <LoadingSpinner label={isClaiming ? "جار الاستلام" : "جار التحميل"} />
+          ) : canClaim ? (
+            "استلام المكافأة"
+          ) : (
+            nextAvailableMessage || "تم استلام مكافأة اليوم"
+          )}
         </Button>
       </div>
     </Card>

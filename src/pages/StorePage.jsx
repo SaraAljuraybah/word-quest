@@ -95,6 +95,7 @@ export function StorePage() {
               reward={dailyReward.reward}
               canClaim={dailyReward.canClaim}
               nextAvailableMessage={dailyReward.nextAvailableMessage}
+              authLoading={dailyReward.authLoading}
               isLoading={dailyReward.isLoading}
               isClaiming={dailyReward.isClaiming}
               toast={dailyReward.toast}

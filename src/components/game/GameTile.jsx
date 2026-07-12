@@ -27,7 +27,7 @@ export function GameTile({ tile, rowStatus }) {
         ease: "easeOut",
       }}
       className={cn(
-        "grid aspect-square place-items-center rounded-xl border-2 text-xl font-black shadow-md transition-colors sm:rounded-2xl sm:text-3xl sm:shadow-lg",
+        "game-tile grid aspect-square place-items-center rounded-xl border-2 text-xl font-black shadow-md transition-colors sm:rounded-2xl sm:text-3xl sm:shadow-lg",
         stateClasses[tile.state]
       )}
     >

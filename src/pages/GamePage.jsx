@@ -94,8 +94,8 @@ function PowerUpsPanel({ items, isLoading, error }) {
   const ownedItems = items.filter((item) => item.quantity > 0);
 
   return (
-    <aside className="w-full rounded-3xl border border-slate-200/70 bg-white/70 p-3 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.05] lg:max-w-[220px]">
-      <div className="mb-3 flex items-center justify-between gap-2">
+    <aside className="powerups-panel w-full rounded-3xl border border-slate-200/70 bg-white/70 p-3 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.05] lg:max-w-[220px]">
+      <div className="powerups-heading mb-3 flex items-center justify-between gap-2">
         <h2 className="text-sm font-black text-slate-950 dark:text-white">العناصر</h2>
         <span className="rounded-full bg-primary/10 px-2 py-1 text-[11px] font-black text-primary">
           {ownedItems.length}
@@ -109,19 +109,19 @@ function PowerUpsPanel({ items, isLoading, error }) {
       ) : ownedItems.length === 0 ? (
         <p className="text-xs font-bold text-slate-500 dark:text-slate-400">لا توجد عناصر حالياً</p>
       ) : (
-        <div className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible lg:pb-0">
+        <div className="powerups-list flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible lg:pb-0">
           {ownedItems.map((item) => {
             const Icon = item.icon;
 
             return (
               <div
                 key={item.key}
-                className="relative flex min-w-28 items-center gap-2 rounded-2xl border border-slate-200 bg-white/85 px-3 py-2 shadow-sm dark:border-white/10 dark:bg-white/[0.07] lg:min-w-0"
+                className="powerup-item relative flex min-w-28 items-center gap-2 rounded-2xl border border-slate-200 bg-white/85 px-3 py-2 shadow-sm dark:border-white/10 dark:bg-white/[0.07] lg:min-w-0"
               >
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary dark:bg-primary/20">
+                <span className="powerup-icon grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary dark:bg-primary/20">
                   <Icon className="h-5 w-5" />
                 </span>
-                <span className="min-w-0 flex-1 truncate text-xs font-black text-slate-800 dark:text-white">
+                <span className="powerup-name min-w-0 flex-1 truncate text-xs font-black text-slate-800 dark:text-white">
                   {item.name}
                 </span>
                 <span className="absolute -left-1.5 -top-1.5 grid h-6 min-w-6 place-items-center rounded-full border border-gold/40 bg-gold px-1.5 text-xs font-black text-slate-950 shadow-sm">
@@ -157,14 +157,14 @@ export function GamePage() {
   }, [game.completedStage?.stage_number, navigate, visibleStageNumber]);
 
   return (
-    <main className="min-h-[calc(100svh-73px)] overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100 px-3 py-3 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 sm:min-h-[calc(100vh-81px)] sm:px-4 sm:py-5">
+    <main className="game-page min-h-[calc(100dvh-73px)] overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100 px-2 py-2 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 sm:min-h-[calc(100vh-81px)] sm:px-4 sm:py-5">
       <div className="pointer-events-none fixed inset-0 opacity-80">
         <div className="absolute left-1/2 top-16 h-52 w-52 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl sm:h-72 sm:w-72" />
         <div className="absolute bottom-0 right-10 h-48 w-48 rounded-full bg-gold/10 blur-3xl sm:h-64 sm:w-64" />
       </div>
 
-      <div className="relative mx-auto flex min-h-[calc(100svh-97px)] max-w-4xl flex-col gap-3 sm:min-h-[calc(100vh-121px)] sm:gap-5">
-        <header className="flex items-center justify-between gap-2 rounded-2xl border border-slate-200/70 bg-white/85 px-2.5 py-2 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.05] sm:rounded-3xl sm:px-3 sm:py-3">
+      <div className="game-shell relative mx-auto flex min-h-[calc(100dvh-89px)] max-w-4xl flex-col gap-2 sm:min-h-[calc(100vh-121px)] sm:gap-5">
+        <header className="game-topbar flex items-center justify-between gap-2 rounded-2xl border border-slate-200/70 bg-white/85 px-2 py-1.5 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.05] sm:rounded-3xl sm:px-3 sm:py-3">
           <Link
             to="/stages"
             className="grid h-10 w-10 place-items-center rounded-xl text-slate-700 transition hover:bg-slate-900/5 dark:text-white dark:hover:bg-white/10 sm:h-11 sm:w-11 sm:rounded-2xl"
@@ -184,7 +184,7 @@ export function GamePage() {
           </div>
         </header>
 
-        <section className="grid flex-1 place-items-center rounded-3xl border border-slate-200/70 bg-white/80 p-3 backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.04] sm:rounded-[2rem] sm:p-6">
+        <section className="game-stage grid flex-1 place-items-center rounded-3xl border border-slate-200/70 bg-white/80 p-2 backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.04] sm:rounded-[2rem] sm:p-6">
           {game.isLoading ? (
             <LoadingSpinner label="جاري تجهيز المرحلة" />
           ) : game.status === GAME_STATUS.error ? (
@@ -196,8 +196,8 @@ export function GamePage() {
               <p className="mt-3 leading-7 text-slate-600 dark:text-slate-300">{game.message}</p>
             </div>
           ) : (
-            <div className="grid w-full items-center gap-3 lg:grid-cols-[minmax(0,1fr)_220px] lg:gap-5">
-              <div className="min-w-0 space-y-2 sm:space-y-4">
+            <div className="game-play-area grid w-full items-center gap-2 lg:grid-cols-[minmax(0,1fr)_220px] lg:gap-5">
+              <div className="min-w-0 space-y-1.5 sm:space-y-4">
                 <GameBoard
                   rows={game.boardRows}
                   shakeRowId={game.shakeRowId}
